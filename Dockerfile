@@ -3,6 +3,11 @@ FROM continuumio/miniconda3:4.8.2 as base
 # Make sure conda is up-to-date.
 RUN conda update -n base -c defaults -y conda
 
+# Install node so that JupyterLab extensions can be used.
+RUN apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs
+
 # Ensure default user isn't root.
 RUN adduser --gecos "JupyterLab User" --disabled-password app
 USER app
