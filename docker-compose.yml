@@ -3,5 +3,6 @@ services:
     jupyterlab:
         build: .
         image: jupyter
+        init: true
         ports:
             - "8888:8888"
