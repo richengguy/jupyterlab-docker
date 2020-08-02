@@ -18,6 +18,8 @@ FROM base as condaEnv
 COPY --chown=app:app environment.yml /home/app/environment.yml
 RUN conda config --prepend pkgs_dirs /home/app/.conda/pkgs
 RUN conda env create --prefix ./env
+RUN ./env/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN ./env/bin/jupyter lab build
 
 # Start JupyterLab
 FROM base as jupyter
