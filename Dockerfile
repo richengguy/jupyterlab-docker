@@ -18,11 +18,15 @@ FROM base as condaEnv
 COPY --chown=app:app environment.yml /home/app/environment.yml
 RUN conda config --prepend pkgs_dirs /home/app/.conda/pkgs
 RUN conda env create --prefix ./env
+RUN ./env/bin/jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN ./env/bin/jupyter lab build
+RUN ./env/bin/jupyter lab clean
 
-# Start JupyterLab
+# Setup the Jupyter Lab base layer.
 FROM base as jupyter
-COPY --chown=app:app entrypoint.sh /home/app/entrypoint.sh
-COPY --from=condaEnv /home/app/env /home/app/env
-RUN chmod u+x /home/app/entrypoint.sh
+COPY --chown=app:app --from=condaEnv /home/app/env /home/app/env
+COPY --chown=app:app scripts /home/app/scripts
+RUN bash /home/app/scripts/setup.sh
+RUN chmod u+x /home/app/scripts/entrypoint.sh
 EXPOSE 8888
-CMD [ "/home/app/entrypoint.sh" ]
+CMD [ "/home/app/scripts/entrypoint.sh" ]
