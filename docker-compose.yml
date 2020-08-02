@@ -6,3 +6,8 @@ services:
         init: true
         ports:
             - "8888:8888"
+        volumes:
+            - jupyter-volume:/home/app/notebooks
+
+volumes:
+    jupyter-volume:
