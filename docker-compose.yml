@@ -6,8 +6,16 @@ services:
         init: true
         ports:
             - "8888:8888"
+        environment:
+            # Jupyter runtime defaults
+            JUPYTER_WORKING_DIR: /home/app/notebooks
+            JUPYTER_PASSWD: jupyter
         volumes:
-            - jupyter-volume:/home/app/notebooks
+            - notebooks:/home/app/notebooks
+            - application:/home/app/env/share/jupyter/lab
+            - config:/home/app/.jupyter
 
 volumes:
-    jupyter-volume:
+    notebooks:
+    application:
+    config:
