@@ -7,3 +7,4 @@ dependencies:
     - ipympl
     - jupyterlab
     - matplotlib
+    - scikit-image
