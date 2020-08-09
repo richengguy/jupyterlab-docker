@@ -6,7 +6,12 @@ RUN conda update -n base -c defaults -y conda
 # Install node so that JupyterLab extensions can be used.
 RUN apt-get install -y curl && \
     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y \
+        nodejs \
+        pandoc \
+        texlive-xetex \
+        texlive-fonts-recommended \
+        texlive-generic-recommended
 
 # Ensure default user isn't root.
 RUN adduser --gecos "JupyterLab User" --disabled-password app
