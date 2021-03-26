@@ -13,4 +13,4 @@ To run the instance,
 docker-compose up
 ```
 
-The password is `jupyter` (see [Dockerfile](Dockerfile)).
+The password is `jupyter` (see [compose file](docker-compose.yml)).
