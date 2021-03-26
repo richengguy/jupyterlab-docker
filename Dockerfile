@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.8.2 as base
+FROM continuumio/miniconda3:4.9.2 as base
 
 # Make sure conda is up-to-date.
 RUN conda update -n base -c defaults -y conda
